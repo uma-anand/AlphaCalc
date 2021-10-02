@@ -26,10 +26,12 @@ Make sure the assets folder is copied correctly.
 
 Credits
 --------
-To myself (obviously, do you honestly think this ego doesn't need more pulls)
+To myself (obviously, do you honestly think this ego doesn't need more pulls).
 
 To Sreya, my partner in crime through this, and who has survived my spamming her with messages at 1 am about how we should use Helvetica over Garamond.
 
 To @ParthJadav for inventing Python Drag and Drop and saving us from hair-pulling sessions with (horror of horrors) Tkinter. Instead we just spent 5 hours figuring out if the black we chose is _too_ dark.
+
+Here's the link to his Tkinter Designer using Figma:
 
 https://github.com/ParthJadhav/Tkinter-Designer
