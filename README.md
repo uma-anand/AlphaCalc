@@ -1,7 +1,11 @@
 # AlphaCalc
-AlphaCalc is a calculator (with a GUI component) that takes verbal input in the form of text or audio, such as "multiply 4 by 3 subtracted by 2" and converts it into a mathematical expression which it evaluates. Users can add or specifically remove presets such as "multiplied by" evaluates to "*" in each use.
+AlphaCalc is an application that takes verbal input in the form of text or audio, such as "multiply 4 by 3 subtracted by 2" and converts it into a mathematical expression which it evaluates.
 
-It also has a memory feature which can be accessed or cleared at any time.
+Features
+-------------
+- comes with a memory that can be accessed or cleared at any time
+- the way the calculator evaluates expressions is through presets, which can be added or removed at any time
+- there are default presets in built, don't worry, you won't need to add "multiply" and "divide" from scratch, for an application that noone's probably going to use (_pain_)
 
 Prerequisites
 -------------
@@ -16,6 +20,16 @@ The following modules are to be installed:
 - gTTS
 
 If these modules are not already installed, just install them from the Command Prompt using:
->pip install <module_name>
+```>pip install <module_name>```
 
-The assets folder must be copied correctly.
+Make sure the assets folder is copied correctly.
+
+Credits
+--------
+To myself (obviously, do you honestly think this ego doesn't need more pulls)
+
+To Sreya, my partner in crime through this, and who has survived my spamming her with messages at 1 am about how we should use Helvetica over Garamond.
+
+To @ParthJadav for inventing Python Drag and Drop and saving us from hair-pulling sessions with (horror of horrors) Tkinter. Instead we just spent 5 hours figuring out if the black we chose is _too_ dark.
+
+https://github.com/ParthJadhav/Tkinter-Designer
