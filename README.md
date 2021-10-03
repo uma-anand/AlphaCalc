@@ -5,7 +5,7 @@ Features
 -------------
 - comes with a memory that can be accessed or cleared at any time
 - the way the calculator evaluates expressions is through presets, which can be added or removed at any time
-- there are default presets in built, don't worry, you won't need to add "multiply" and "divide" from scratch, for an application that noone's probably going to use (_pain_)
+- there are default presets in built, don't worry, you won't need to add "multiply" and "divide" from scratch, we've already done that, for an application that noone's probably going to use (_pain_)
 
 Prerequisites
 -------------
