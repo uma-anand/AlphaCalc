@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import mysql.connector as ms
 
+#sample comment
 two_part_operations = {"type":"two_part_operations", "divide":"by", "multiply":"with", "add":"with", "subtract":"from"}
 operations_translations = {"type":"operations_translations","divide":"/", "multiply":"*", "add":"+", "subtract":"-"}
 like_add = {"type":"like_add","divide":"/", "multiply":"*", "add":"+"}
