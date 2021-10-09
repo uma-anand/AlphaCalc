@@ -20,9 +20,12 @@ The following modules are to be installed:
 - gTTS
 
 If these modules are not already installed, just install them from the Command Prompt using:
-```>pip install <module_name>```
+```pip install <module_name>```
 
-Make sure the assets folder is copied correctly.
+How to Use This
+-----------
+If this is the first time you are using this application, first run "start_up.py". After this, on all subsequent uses, just run "main.py".
+
 
 Credits
 --------
