@@ -30,11 +30,27 @@ def create_temp():
         cur.execute(a)
         con.commit()
 
-def add_preset(types, operation_name, operation):
-    for x in types:
-        a = 'insert into '+x+' values ("'+operation_name+'", "'+operation+'")'
+def add_preset(type, part_1, part_2, translation):
+    if part_2 == "":
+        types = ["like_exp",]
+    else:
+        a = 'insert into two_part_operations values ("'+part_1+'", "'+part_2+'")'
         cur.execute(a)
-        a = 'insert into temp_'+x+' values ("'+operation_name+'", "'+operation+'")'
+        a = 'insert into temp_two_part_operations values ("'+part_1+'", "'+part_2+'")'
+        cur.execute(a)
+        a = 'insert into operations_overall values ("'+part_1+'", "'+part_2+'")'
+        cur.execute(a)
+        a = 'insert into temp_operations_overall values ("'+part_1+'", "'+part_2+'")'
+        cur.execute(a)
+        con.commit()
+        if type == '1':
+            types = ["like_subtract",]
+        else:
+            types = ["like_add",]
+    for x in types:
+        a = 'insert into '+x+' values ("'+part_1+'", "'+translation+'")'
+        cur.execute(a)
+        a = 'insert into temp_'+x+' values ("'+part_1+'", "'+translation+'")'
         cur.execute(a)
 
 '''
