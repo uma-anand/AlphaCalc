@@ -32,7 +32,7 @@ def create_temp():
 
 def add_preset(type, part_1, part_2, translation):
     if part_2 == "":
-        types = ["like_exp",]
+        types = ["like_exp", "operations_overall"]
     else:
         a = 'insert into two_part_operations values ("'+part_1+'", "'+part_2+'")'
         cur.execute(a)
@@ -41,6 +41,10 @@ def add_preset(type, part_1, part_2, translation):
         a = 'insert into operations_overall values ("'+part_1+'", "'+part_2+'")'
         cur.execute(a)
         a = 'insert into temp_operations_overall values ("'+part_1+'", "'+part_2+'")'
+        cur.execute(a)
+        a = 'insert into operations_translations values ("'+part_1+'", "'+part_2+'")'
+        cur.execute(a)
+        a = 'insert into temp_operations_translations values ("'+part_1+'", "'+part_2+'")'
         cur.execute(a)
         con.commit()
         if type == '1':
@@ -51,6 +55,15 @@ def add_preset(type, part_1, part_2, translation):
         a = 'insert into '+x+' values ("'+part_1+'", "'+translation+'")'
         cur.execute(a)
         a = 'insert into temp_'+x+' values ("'+part_1+'", "'+translation+'")'
+        cur.execute(a)
+
+def delete_preset(part_1,part_2):
+    if part_2=="":
+        x = ["temp_like_exp", "temp_operations_overall"]
+    else:
+        x = ["temp_two_part_operations","temp_operations_translations", "temp_like_add","temp_like_subtract", "operations_overall"]
+    for y in x:
+        a = 'delete from '+y+' where operation_name = "'+part_1+'"'
         cur.execute(a)
 
 '''
