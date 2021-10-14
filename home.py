@@ -10,7 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import mysql.connector as ms
+from pathlib import Path
 from calculator import Ui_CalcWindow
+
+def relative_to_bg(path: str) -> Path:
+        return BG_PATH / Path(path)
+OUTPUT_PATH = Path(__file__).parent
+BG_PATH = OUTPUT_PATH / Path("./backgrounds")
 
 class Ui_LoginWindow(object):
     def setupUi(self, LoginWindow):
@@ -21,7 +27,7 @@ class Ui_LoginWindow(object):
         self.bg = QtWidgets.QLabel(self.centralwidget)
         self.bg.setGeometry(QtCore.QRect(0, 0, 500, 654))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/bg.jpg"))
+        self.bg.setPixmap(QtGui.QPixmap(str(relative_to_bg("bg.jpg"))))
         self.bg.setObjectName("bg")
         self.hide = QtWidgets.QLabel(self.centralwidget)
         self.hide.setGeometry(QtCore.QRect(20, 600, 461, 31))
