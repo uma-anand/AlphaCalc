@@ -9,7 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from pathlib import Path
 
+def relative_to_bg(path: str) -> Path:
+        return BG_PATH / Path(path)
+OUTPUT_PATH = Path(__file__).parent
+BG_PATH = OUTPUT_PATH / Path("./backgrounds")
 
 class Ui_CalcWindow(object):
     def setupUi(self, CalcWindow):
@@ -25,7 +30,7 @@ class Ui_CalcWindow(object):
         self.About = QtWidgets.QLabel(self.tab_1)
         self.About.setGeometry(QtCore.QRect(0, 0, 500, 489))
         self.About.setText("")
-        self.About.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/About.jpg"))
+        self.About.setPixmap(QtGui.QPixmap(str(relative_to_bg("About.jpg"))))
         self.About.setObjectName("About")
         self.Tabs.addTab(self.tab_1, "")
         self.tab_2 = QtWidgets.QWidget()
@@ -33,7 +38,7 @@ class Ui_CalcWindow(object):
         self.Instructions = QtWidgets.QLabel(self.tab_2)
         self.Instructions.setGeometry(QtCore.QRect(0, 0, 500, 489))
         self.Instructions.setText("")
-        self.Instructions.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/Instructions.jpg"))
+        self.Instructions.setPixmap(QtGui.QPixmap(str(relative_to_bg("Instructions.jpg"))))
         self.Instructions.setObjectName("Instructions")
         self.Tabs.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
@@ -41,7 +46,7 @@ class Ui_CalcWindow(object):
         self.View_Presets = QtWidgets.QLabel(self.tab_3)
         self.View_Presets.setGeometry(QtCore.QRect(0, 0, 500, 487))
         self.View_Presets.setText("")
-        self.View_Presets.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/View Presets.jpg"))
+        self.View_Presets.setPixmap(QtGui.QPixmap(str(relative_to_bg("View Presets.jpg"))))
         self.View_Presets.setObjectName("View_Presets")
         self.Display = QtWidgets.QLabel(self.tab_3)
         self.Display.setGeometry(QtCore.QRect(35, 130, 430, 315))
@@ -55,7 +60,7 @@ class Ui_CalcWindow(object):
         self.Edit_Presets = QtWidgets.QLabel(self.tab_4)
         self.Edit_Presets.setGeometry(QtCore.QRect(0, 0, 500, 489))
         self.Edit_Presets.setText("")
-        self.Edit_Presets.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/Edit Presets.jpg"))
+        self.Edit_Presets.setPixmap(QtGui.QPixmap(str(relative_to_bg("Edit Presets.jpg"))))
         self.Edit_Presets.setObjectName("Edit_Presets")
         self.Input_1 = QtWidgets.QLineEdit(self.tab_4)
         self.Input_1.setGeometry(QtCore.QRect(36, 189, 191, 31))
@@ -111,7 +116,7 @@ class Ui_CalcWindow(object):
         self.Calculator = QtWidgets.QLabel(self.tab_5)
         self.Calculator.setGeometry(QtCore.QRect(0, 0, 500, 489))
         self.Calculator.setText("")
-        self.Calculator.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/Calculator.jpg"))
+        self.Calculator.setPixmap(QtGui.QPixmap(str(relative_to_bg("Calculator.jpg"))))
         self.Calculator.setObjectName("Calculator")
         self.Expression = QtWidgets.QPlainTextEdit(self.tab_5)
         self.Expression.setGeometry(QtCore.QRect(35, 170, 431, 71))
@@ -152,7 +157,7 @@ class Ui_CalcWindow(object):
         self.Memory = QtWidgets.QLabel(self.tab_6)
         self.Memory.setGeometry(QtCore.QRect(0, 0, 500, 489))
         self.Memory.setText("")
-        self.Memory.setPixmap(QtGui.QPixmap("../../../../../../Documents/Sreya/Memory.jpg"))
+        self.Memory.setPixmap(QtGui.QPixmap(str(relative_to_bg("Memory.jpg"))))
         self.Memory.setObjectName("Memory")
         self.Mem_Display = QtWidgets.QLabel(self.tab_6)
         self.Mem_Display.setGeometry(QtCore.QRect(40, 130, 421, 251))
