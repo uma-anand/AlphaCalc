@@ -12,7 +12,7 @@ Prerequisites
 The machine must have MySQL installed. The password asked for by AlphaCalc is the MySQL password.
 
 The following modules are to be installed:
-- Tkinter
+- PyQt5
 - mysql.connector
 - Pyaudio
 - playsound
@@ -24,10 +24,5 @@ If these modules are not already installed, just install them from the Command P
 
 Make sure the assets folder is copied correctly.
 
-Credits
---------
-To myself (obviously, do you honestly think this ego doesn't need more pulls).
-
-To Sreya, my partner in crime through this, and who has survived my spamming her with messages at 1 am about how we should use Helvetica over Garamond.
 
 
