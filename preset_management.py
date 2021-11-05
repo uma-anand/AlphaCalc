@@ -10,93 +10,42 @@ cur = con.cursor()
 cur.execute("use presets")
 
 def delete_temp():
-    for x in overall_names:
-        a = "drop table temp_"+x
-        cur.execute(a)
-        con.commit()
+    a = "drop table temp_operations"
+    cur.execute(a)
+    con.commit()
 
 def temp_exists():
     cur.execute("show tables")
     data = cur.fetchall()
-    if "temp_like_exp" in data:
+    if "temp_operations" in data:
         return True
     return False
 
 def create_temp():
-    for tablename in overall_names:
-        c = "create table temp_"+tablename+ " (operation_name varchar(50), operation varchar(50))"
-        cur.execute(c)
-        a = "insert into temp_"+tablename+ " select * from "+tablename
-        cur.execute(a)
-        con.commit()
+    c = "create table temp_operations (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
+    cur.execute(c)
+    a = "insert into temp_operations select * from operations"
+    cur.execute(a)
+    con.commit()
 
 def add_preset(type, part_1, part_2, translation):
-    if part_2 == "":
-        types = ["like_exp", "operations_overall"]
-    else:
-        a = 'insert into two_part_operations values ("'+part_1+'", "'+part_2+'")'
-        cur.execute(a)
-        a = 'insert into temp_two_part_operations values ("'+part_1+'", "'+part_2+'")'
-        cur.execute(a)
-        a = 'insert into operations_overall values ("'+part_1+'", "'+part_2+'")'
-        cur.execute(a)
-        a = 'insert into temp_operations_overall values ("'+part_1+'", "'+part_2+'")'
-        cur.execute(a)
-        a = 'insert into operations_translations values ("'+part_1+'", "'+part_2+'")'
-        cur.execute(a)
-        a = 'insert into temp_operations_translations values ("'+part_1+'", "'+part_2+'")'
+        a = "insert into temp_operations values ( '%s', '%s', '%s', '%s' )" %(type, part_1, part_2, translation)
         cur.execute(a)
         con.commit()
-        if type == '1':
-            types = ["like_subtract",]
-        else:
-            types = ["like_add",]
-    for x in types:
-        a = 'insert into '+x+' values ("'+part_1+'", "'+translation+'")'
-        cur.execute(a)
-        a = 'insert into temp_'+x+' values ("'+part_1+'", "'+translation+'")'
-        cur.execute(a)
 
 def delete_preset(part_1,part_2):
-    if part_2=="":
-        x = ["temp_like_exp", "temp_operations_overall"]
-    else:
-        x = ["temp_two_part_operations","temp_operations_translations", "temp_like_add","temp_like_subtract", "operations_overall"]
-    for y in x:
-        a = 'delete from '+y+' where operation_name = "'+part_1+'"'
-        cur.execute(a)
+    a = "delete from temp_operations where operation_part_1 = '%s' and operation_part_2 = '%s'" %(part_1, part_2)
+    cur.execute(a)
+    con.commit()
 
 '''
 data will be of form
-[('type', 'like_add'), ('divide', '/'), ('multiply', '*'), ('add', '+')]
+[("2", "/", "divide","by"), ("2", "*", "multiply","with"), ("2", "*", "multiply","by")...]
 '''
 
 def update_dicts():
-    for x in overall_names:
-        a = "select * from temp_"+x
-        ind = overall_names.index(x)
-        corr_dict = overall[ind]
-        cur.execute(a)
-        data = cur.fetchall()
-        corr_dict = {}
-        for tup in data:
-            corr_dict[tup[0]] = tup[1]
-        if x == "two_part_operations":
-            two_part_operations.clear()
-            two_part_operations.update(corr_dict)
-        elif x == "operations_translations":
-            operations_translations.clear()
-            operations_translations.update(corr_dict)
-        elif x == "like_add":
-            like_add.clear()
-            like_add.update(corr_dict)
-        elif x == "like_subtract":
-            like_subtract.clear()
-            like_subtract.update(corr_dict)
-        elif x == "like_exp":
-            like_exp.clear()
-            like_exp.update(corr_dict)
-        elif x == "operations_overall":
-            operations_overall.clear()
-            operations_overall.update(corr_dict)
+    a = "select * from temp_operations"
+    cur.execute(a)
+    global operations
+    operations = cur.fetchall()
 
