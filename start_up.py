@@ -1,19 +1,12 @@
 import mysql.connector as ms
 import sys
 
-two_part_operations = {"type":"two_part_operations", "divide":"by", "multiply":"with", "add":"with", "subtract":"from"}
-operations_translations = {"type":"operations_translations","divide":"/", "multiply":"*", "add":"+", "subtract":"-"}
-like_add = {"type":"like_add","divide":"/", "multiply":"*", "add":"+"}
-like_subtract = {"type":"like_subtract","subtract":"-"}
-like_exp = {"type":"like_exp","to the power of":"**", "^":"**", "multiplied by": "*", "divided by": "/", "multiplied with": "*", 
-            "added with": "+", "subtracted by":"-", "greater than or equal to": ">=", "is greater than":">","greater than":">", 
-            "lesser than or equal to": "<=", "is lesser than":"<", "lesser than":"<", "is equal to":"==", "equal to":"=="}
-operations_overall =  {"type":"operations_overall", "multiplied by": "*", "divided by": "/", "multiplied with": "*", "added with": "+", 
-                "subtracted by":"-", "divide":"by", "multiply":"with", "add":"with", "subtract":"from", "to the power of":"**",
-                "^":"**",  "greater than or equal to": ">=", "is greater than":">","greater than":">", "lesser than or equal to": "<=",
-                "is lesser than":"<", "lesser than":"<", "is equal to":"==", "equal to":"==" }
-overall = [two_part_operations, operations_translations, like_add, like_subtract, like_exp, operations_overall]
-overall_names = ["two_part_operations", "operations_translations", "like_add", "like_subtract", "like_exp", "operations_overall"]
+operations = [["2", "/", "divide","by"], ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], ["2", "+", "add","with"], ["2", "+", "add","to"],
+              ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], ["", "**", "to the power of", ""],
+              ["", "**", "^", ""], ["", "*", "multiplied by", ""], ["", "*", "multiplied with", ""], ["", "+", "added by", ""], ["", "+", "added with", ""],
+              ["", "-", "subtracted by", ""], ["", ">=", "greater than or equal to", ""], ["", ">", "is greater than", ""], ["", ">", "greater than", ""],
+              ["", "<=", "lesser than or equal to", ""], ["", "<=", "less than or equal to", ""], ["", "<", "is less than", ""], ["", "<", "less than", ""],
+              ["", "==", "is equal to", ""], ["", "==", "equal to", ""]]
 
 def check_password(password):
     try:
@@ -41,17 +34,12 @@ def use_presets():
         use_presets()
 
 def create_table(tablename):
-    b = "create table "+ tablename+" (operation_name varchar(50), operation varchar(50))"
+    b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
     cur.execute(b)
-    ind = overall_names.index(tablename)
-    corr_dict = overall[ind]
-    for x in corr_dict:
-        a = "insert into "+tablename+ " values ( '"+ x+"', '"+ corr_dict[x]+"')"
+    for x in operations:
+        a = "insert into "+tablename+ " values ( '%s', '%s', '%s', '%s' )" %(x[0], x[1], x[2], x[3])
         cur.execute(a)
         con.commit()
 
 def create_presets():
-    for y in overall_names:
-        create_table(y)
-
-
+    create_table("operations")
