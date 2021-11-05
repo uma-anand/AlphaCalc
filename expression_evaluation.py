@@ -3,28 +3,27 @@ from preset_management import *
 create_temp()
 update_dicts()
 
-
 #calculates expression given the input multiply 3 by 4 or 
  
 def translate_operations(phrase):
-    for a in operations_overall:
-        if a in phrase:
+    for a in operations:
+        if a[2] in phrase:
             operation = a
             break
     else:
         return phrase
-    if operation not in like_exp:
-        sub_ind = phrase.index(two_part_operations[a])
-    operation_ind = phrase.index(a)
-    if operation in like_add:
-        to_eval = phrase[operation_ind+len(operation):sub_ind:]+operations_translations[operation]+phrase[sub_ind+len(two_part_operations[operation])::]
-    elif operation in like_subtract:
-        to_eval = phrase[sub_ind+len(two_part_operations[operation])::]+operations_translations[operation]+phrase[operation_ind+len(operation):sub_ind:]
-    elif operation in like_exp:
-        to_eval = phrase[:operation_ind:]+like_exp[operation]+phrase[operation_ind+len(operation)::]
+    if operation[0] != "":
+        sub_ind = phrase.index(operation[3])
+    operation_ind = phrase.index(operation[2])
+    if operation[0] == "2":
+        to_eval = phrase[operation_ind+len(operation[2]):sub_ind:]+operation[1]+phrase[sub_ind+len(operation[3])::]
+    elif operation[0] == "1":
+        to_eval = phrase[sub_ind+len(operation[3])::]+operation[1]+phrase[operation_ind+len(operation[2]):sub_ind:]
+    elif operation[0] == "":
+        to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
     return to_eval
  
- # split the expression into smaller fragments
+# split the expression into smaller fragments based on bracket placements
 
 def split_expression(expression):
     from re import split
@@ -37,6 +36,8 @@ def split_expression(expression):
         ans=expression.replace(x,y)
         expression=ans
     return eval(str(ans))
+
+#if brackets not already added, adds them mechanically, from left to right
 
 def addbrackets(express):
     expression = express
@@ -73,12 +74,14 @@ def addbrackets(express):
     except SyntaxError:
         return addbrackets(new_expression)
 
+# control of evaluation
+
 def evaluation(expression):
     try:
         return split_expression(expression)
     except SyntaxError:
         return addbrackets(expression)
-     
+
 def audio():
     # To Convert Speech to Text
     from speech_recognition import Recognizer,Microphone
