@@ -40,6 +40,7 @@ def delete_preset(part_1,part_2):
 
 '''
 data will be of form
+The columns will be Type, Translation, Operation Part 1, Operation Part 2
 [("2", "/", "divide","by"), ("2", "*", "multiply","with"), ("2", "*", "multiply","by")...]
 '''
 
@@ -48,4 +49,10 @@ def update_dicts():
     cur.execute(a)
     global operations
     operations = cur.fetchall()
+        
+def view_presets():
+    a = "select * from temp_operations"
+    cur.execute(a)
+    return cur.fetchall()
+
 
