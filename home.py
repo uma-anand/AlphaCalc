@@ -67,7 +67,9 @@ class Ui_LoginWindow(object):
         self.submit.setText(_translate("LoginWindow", "Submit"))
 
     def login(self):
+        QtCore.pyqtRemoveInputHook() 
         from calculator import Ui_CalcWindow
+        from preset_management import view_presets
         try:
             db=ms.connect(host = "localhost", user = "root", passwd = self.pwd_input.text(),database='alphacalc')
             self.window = QtWidgets.QMainWindow()
@@ -84,6 +86,14 @@ class Ui_LoginWindow(object):
                         self.ui.Mem_Display.setItem(row_count,1,QtWidgets.QTableWidgetItem(str(x[1])))
                         self.ui.Mem_Display.setItem(row_count,2,QtWidgets.QTableWidgetItem(x[2]))
                         self.ui.Mem_Display.setItem(row_count,3,QtWidgets.QTableWidgetItem(str(x[3])))
+            presets=view_presets()
+                for y in presets:
+                        row_count=self.ui.Display.rowCount()
+                        self.ui.Display.setRowCount(row_count+1)
+                        self.ui.Display.setItem(row_count,0,QtWidgets.QTableWidgetItem(y[0]))
+                        self.ui.Display.setItem(row_count,1,QtWidgets.QTableWidgetItem(y[1]))
+                        self.ui.Display.setItem(row_count,2,QtWidgets.QTableWidgetItem(y[2]))
+                        self.ui.Display.setItem(row_count,3,QtWidgets.QTableWidgetItem(y[3]))
             self.window.show()
             LoginWindow.hide()
         except Exception:
