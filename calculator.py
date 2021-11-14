@@ -79,6 +79,21 @@ class Ui_CalcWindow(object):
             playsound('answer.mp3') 
             remove('answer.mp3')         
                   
+    def add(self):
+            from preset_management import add_preset
+            add_preset(self.Input_1.text(),self.Input_3.text(),self.Input_4.text(),self.Input_2.text())
+            row_count=self.Display.rowCount()
+            self.Display.setRowCount(row_count+1)
+            self.Display.setItem(row_count,0,QtWidgets.QTableWidgetItem(self.Input_1.text()))
+            self.Display.setItem(row_count,1,QtWidgets.QTableWidgetItem(self.Input_3.text()))
+            self.Display.setItem(row_count,2,QtWidgets.QTableWidgetItem(self.Input_4.text()))
+            self.Display.setItem(row_count,3,QtWidgets.QTableWidgetItem(self.Input_2.text()))
+            
+    def remove(self):
+            from preset_management import delete_preset
+            delete_preset(self.Input_5.text(),self.Input_6.text())
+            row_no=(self.Display.findItems(self.Input_5.text(),QtCore.Qt.MatchFlag.MatchExactly))[0].row()
+            self.Display.removeRow(row_no)    
 
     def setupUi(self, CalcWindow):
         CalcWindow.setObjectName("CalcWindow")
@@ -167,7 +182,7 @@ class Ui_CalcWindow(object):
 "")
         self.Input_6.setFrame(False)
         self.Input_6.setObjectName("Input_6")
-        self.Add_But = QtWidgets.QPushButton(self.tab_4)
+        self.Add_But = QtWidgets.QPushButton(self.tab_4,clicked=lambda:self.add())
         self.Add_But.setGeometry(QtCore.QRect(193, 426, 111, 31))
         self.Add_But.setStyleSheet("font: 87 15pt \"Arial Black\";\n"
 "background-color: rgba(170, 163, 255, 1);\n"
@@ -179,7 +194,7 @@ class Ui_CalcWindow(object):
 "background-color: rgba(170, 163, 255, 1);\n"
 "")
         self.Erase_But.setObjectName("Erase_But")
-        self.Remove_But = QtWidgets.QPushButton(self.tab_4)
+        self.Remove_But = QtWidgets.QPushButton(self.tab_4,clicked=lambda:self.remove())
         self.Remove_But.setGeometry(QtCore.QRect(350, 426, 111, 31))
         self.Remove_But.setStyleSheet("font: 87 15pt \"Arial Black\";\n"
 "background-color: rgba(170, 163, 255, 1);\n"
