@@ -55,4 +55,5 @@ def view_presets():
     cur.execute(a)
     return cur.fetchall()
 
-
+if not temp_exists():
+    create_temp()
