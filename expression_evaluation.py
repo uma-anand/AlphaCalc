@@ -1,6 +1,5 @@
 from preset_management import *
 
-create_temp()
 update_dicts()
 
 #calculates expression given the input multiply 3 by 4 or 
