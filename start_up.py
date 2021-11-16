@@ -1,5 +1,4 @@
 import mysql.connector as ms
-import sys
 
 operations = [["2", "/", "divide","by"], ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], ["2", "+", "add","with"], ["2", "+", "add","to"],
               ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], ["", "**", "to the power of", ""],
@@ -8,15 +7,15 @@ operations = [["2", "/", "divide","by"], ["2", "*", "multiply","with"], ["2", "*
               ["", ">", "greater than", ""], ["", "<=", "lesser than or equal to", ""], ["", "<=", "less than or equal to", ""], ["", "<", "is less than", ""], 
               ["", "<", "less than", ""], ["", "==", "is equal to", ""], ["", "==", "equal to", ""]]
 
-
 def check_password(password):
     try:
         global con, cur
         con = ms.connect(host = "localhost", user = "root", passwd = password)
         cur = con.cursor()
+        return True
     except Exception:
-        print('Invalid Password')
-        sys.exit()
+        return False
+        
 
 def exists(database):
     cur.execute("show databases")
@@ -44,3 +43,6 @@ def create_table(tablename):
 
 def create_presets():
     create_table("operations")
+
+
+
