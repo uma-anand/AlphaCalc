@@ -1,9 +1,8 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pathlib import Path
 import mysql.connector as ms 
 from datetime import date,datetime
-
+from expression_evaluation import *
 
 def relative_to_bg(path: str) -> Path:
         return BG_PATH / Path(path)
@@ -14,7 +13,7 @@ class Ui_CalcWindow(object):
 
     def __init__(self):
         super().__init__()
-        self.variable = ""
+        self.variable = "awesomeisuma123"
 
     def clear(self):
             self.Expression.clear()
