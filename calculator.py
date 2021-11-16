@@ -12,6 +12,10 @@ BG_PATH = OUTPUT_PATH / Path("./backgrounds")
 
 class Ui_CalcWindow(object):
 
+    def __init__(self):
+        super().__init__()
+        self.variable = ""
+
     def clear(self):
             self.Expression.clear()
             self.Answer.setText("")
@@ -31,8 +35,7 @@ class Ui_CalcWindow(object):
             d=str(date.today())
             t=str(datetime.now().strftime("%H:%M:%S"))
             data=(d,t,n,ans)
-            password = input('Enter password:')
-            db = ms.connect(host = "localhost", user = "root", passwd = password)
+            db = ms.connect(host = "localhost", user = "root", passwd = self.variable)
             cur = db.cursor()
             cur.execute('use alphacalc')
             query='insert into Memory values(%s,%s,%s,%s)'
@@ -47,8 +50,7 @@ class Ui_CalcWindow(object):
             return ans
 
     def delete(self):
-            password = input('Enter password:')
-            db = ms.connect(host = "localhost", user = "root", passwd = password)
+            db = ms.connect(host = "localhost", user = "root", passwd = self.variable)
             cur = db.cursor()
             cur.execute('use alphacalc')
             cur.execute('delete from memory')
