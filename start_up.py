@@ -1,11 +1,12 @@
 import mysql.connector as ms
 
 operations = [["2", "/", "divide","by"], ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], ["2", "+", "add","with"], ["2", "+", "add","to"],
-              ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], ["", "**", "to the power of", ""],
-              ["", "**", "^", ""], ["", "*", "multiplied by", ""], ["", "*", "multiplied with", ""], ["", "+", "added by", ""], ["", "+", "added with", ""],
-              ["", "-", "subtracted by", ""], ["", "/", "divided by", ""], ["", ">=", "greater than or equal to", ""], ["", ">", "is greater than", ""], 
-              ["", ">", "greater than", ""], ["", "<=", "lesser than or equal to", ""], ["", "<=", "less than or equal to", ""], ["", "<", "is less than", ""], 
-              ["", "<", "less than", ""], ["", "==", "is equal to", ""], ["", "==", "equal to", ""]]
+              ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], [" ", "**", "to the power of", " "],
+              [" ", "**", "^", " "], [" ", "*", "multiplied by", " "], [" ", "*", "multiplied with", " "], [" ", "+", "added by", " "], [" ", "+", "added with", " "],
+              [" ", "-", "subtracted by", " "], [" ", "/", "divided by", " "], [" ", ">=", "greater than or equal to", " "], [" ", ">", "is greater than", " "], 
+              [" ", ">", "greater than", " "], [" ", "<=", "lesser than or equal to", " "], [" ", "<=", "less than or equal to", " "], [" ", "<", "is less than", " "], 
+              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "]]
+
 
 def check_password(password):
     try:
