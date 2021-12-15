@@ -127,12 +127,19 @@ class Ui_CalcWindow(object):
         self.View_Presets.setText("")
         self.View_Presets.setPixmap(QtGui.QPixmap(str(relative_to_bg("View Presets.jpg"))))
         self.View_Presets.setObjectName("View_Presets")
-        self.Display = QtWidgets.QLabel(self.tab_3)
+        self.Display = QtWidgets.QTableWidget(self.tab_3)
         self.Display.setGeometry(QtCore.QRect(35, 130, 430, 315))
-        self.Display.setStyleSheet("background-color: (212, 252, 255, 1);\n"
-"font: italic 16pt \"Courier New\";")
-        self.Display.setText("")
+        self.Display.setStyleSheet("background-color: rgba(212, 252, 255, 1);\n"
+"font: 75 12pt \"Courier New\";\n"
+"")
         self.Display.setObjectName("Display")
+        self.Display.setColumnCount(4)
+        self.Display.verticalHeader().setVisible(False)
+        self.Display.setHorizontalHeaderLabels(['Type','Translation','Operation Part 1','Operation Part 2'])
+        self.Display.setColumnWidth(0,100)
+        self.Display.setColumnWidth(1,130)
+        self.Display.setColumnWidth(2,210)
+        self.Display.setColumnWidth(3,210)
         self.Tabs.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
