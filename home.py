@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import mysql.connector as ms
 from pathlib import Path
+from expression_evaluation import begin_eval
+from preset_management import begin, new_temp
 from start_up import check_password
 
 def relative_to_bg(path: str) -> Path:
@@ -72,6 +74,9 @@ class Ui_LoginWindow(object):
             self.ui = Ui_CalcWindow()
             self.ui.variable = password
             self.ui.setupUi(self.window)
+            begin(password)
+            begin_eval(password)
+            new_temp(password)
             cur.execute('select * from memory')
             data=cur.fetchall()
             if any(data):
@@ -82,7 +87,7 @@ class Ui_LoginWindow(object):
                         self.ui.Mem_Display.setItem(row_count,1,QtWidgets.QTableWidgetItem(str(x[1])))
                         self.ui.Mem_Display.setItem(row_count,2,QtWidgets.QTableWidgetItem(x[2]))
                         self.ui.Mem_Display.setItem(row_count,3,QtWidgets.QTableWidgetItem(str(x[3])))
-            presets=view_presets()
+            presets=view_presets(password)
             for y in presets:
                 row_count=self.ui.Display.rowCount()
                 self.ui.Display.setRowCount(row_count+1)
