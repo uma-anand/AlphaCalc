@@ -1,6 +1,8 @@
 from preset_management import *
 
-update_dicts()
+def begin_eval(password):
+    global operations
+    update_dicts(password)
 
 #calculates expression given the input multiply 3 by 4 or 
  
@@ -11,14 +13,14 @@ def translate_operations(phrase):
             break
     else:
         return phrase
-    if operation[0] != "":
+    if operation[0] != "" or operation[0] != " ":
         sub_ind = phrase.index(operation[3])
     operation_ind = phrase.index(operation[2])
     if operation[0] == "2":
         to_eval = phrase[operation_ind+len(operation[2]):sub_ind:]+operation[1]+phrase[sub_ind+len(operation[3])::]
     elif operation[0] == "1":
         to_eval = phrase[sub_ind+len(operation[3])::]+operation[1]+phrase[operation_ind+len(operation[2]):sub_ind:]
-    elif operation[0] == "":
+    elif operation[0] == "" or operation[0] == " ":
         to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
     return to_eval
  
