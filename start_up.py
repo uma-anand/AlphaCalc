@@ -27,11 +27,11 @@ def exists(database):
     return False
 
 def use_presets():
-    if not exists("presets"):
-        cur.execute("create database presets")
-        cur.execute("use presets")
+    if not exists("alphacalc"):
+        cur.execute("create database alphacalc")
+        cur.execute("use alphacalc")
     else:
-        cur.execute("drop database presets")
+        cur.execute("drop database alphacalc")
         use_presets()
 
 def create_table(tablename):
