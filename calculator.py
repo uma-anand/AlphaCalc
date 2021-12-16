@@ -13,7 +13,7 @@ class Ui_CalcWindow(object):
 
     def __init__(self):
         super().__init__()
-        self.variable = "awesomeisuma123"
+        self.variable = " "
 
     def clear(self):
             self.Expression.clear()
@@ -82,7 +82,7 @@ class Ui_CalcWindow(object):
                   
     def add(self):
             from preset_management import add_preset
-            add_preset(self.Input_1.text(),self.Input_3.text(),self.Input_4.text(),self.Input_2.text())
+            add_preset(self.Input_1.text(),self.Input_3.text(),self.Input_4.text(),self.Input_2.text(), self.variable)
             row_count=self.Display.rowCount()
             self.Display.setRowCount(row_count+1)
             self.Display.setItem(row_count,0,QtWidgets.QTableWidgetItem(self.Input_1.text()))
@@ -92,7 +92,7 @@ class Ui_CalcWindow(object):
             
     def remove(self):
             from preset_management import delete_preset
-            delete_preset(self.Input_5.text(),self.Input_6.text())
+            delete_preset(self.Input_5.text(),self.Input_6.text(), self.variable)
             row_no=(self.Display.findItems(self.Input_5.text(),QtCore.Qt.MatchFlag.MatchExactly))[0].row()
             self.Display.removeRow(row_no)    
 
