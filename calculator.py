@@ -13,7 +13,7 @@ class Ui_CalcWindow(object):
 
     def __init__(self):
         super().__init__()
-        self.variable = " "
+        self.variable = " " #to run alone, password goes here
 
     def clear(self):
             self.Expression.clear()
