@@ -79,5 +79,24 @@ def new_temp(password):
         delete_temp(password)
         create_temp(password)
 
-
+#search results will also be a list of tuples, like view presets
+def search(keyword, password):
+    keyword = keyword.lower()
+    search_results = []
+    list_presets = view_presets(password)
+    for tup in list_presets:
+        for part in tup:
+            if part.lower() == keyword:
+                search_results.append(tup)
+    for tup in list_presets:
+        for part in tup:
+            if part.lower() in keyword or keyword in part.lower():
+                search_results.append(tup)
+    for tup in list_presets:
+        for part in tup:
+            if len(part) == len(keyword):
+                for q in range(len(part)):
+                    if (part[0:q] == keyword[0][0:q].lower()) and (part[q+1::].lower() == keyword[0][q+1::]):
+                        search_results.append(tup)
+    return search_results
 
