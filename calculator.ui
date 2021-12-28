@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CalcWindow</class>
+ <widget class="QMainWindow" name="CalcWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>630</width>
+    <height>661</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Alphacalc</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="Tabs">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>631</width>
+      <height>641</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>3</number>
+    </property>
+    <widget class="QWidget" name="tab_1">
+     <attribute name="title">
+      <string>View Presets</string>
+     </attribute>
+     <widget class="QLabel" name="View_Presets">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>625</width>
+        <height>612</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>backgrounds/View Presets.jpg</pixmap>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="Display">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>170</y>
+        <width>551</width>
+        <height>401</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Edit Presets</string>
+     </attribute>
+     <widget class="QLabel" name="Edit_Presets">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>625</width>
+        <height>612</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>backgrounds/Edit Presets.jpg</pixmap>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_1">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>242</y>
+        <width>241</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>243</y>
+        <width>285</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_3">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>327</y>
+        <width>241</width>
+        <height>38</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_4">
+      <property name="geometry">
+       <rect>
+        <x>311</x>
+        <y>327</y>
+        <width>284</width>
+        <height>38</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_5">
+      <property name="geometry">
+       <rect>
+        <x>37</x>
+        <y>480</y>
+        <width>241</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Input_6">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>480</y>
+        <width>281</width>
+        <height>38</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Add_But">
+      <property name="geometry">
+       <rect>
+        <x>232</x>
+        <y>544</y>
+        <width>155</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Erase_But">
+      <property name="geometry">
+       <rect>
+        <x>37</x>
+        <y>544</y>
+        <width>155</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Del_But_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>544</y>
+        <width>155</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Delete</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Search Presets</string>
+     </attribute>
+     <widget class="QLabel" name="Search">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>625</width>
+        <height>612</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>backgrounds/Search.jpg</pixmap>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="Keyword">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>170</y>
+        <width>431</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1)</string>
+      </property>
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="Result">
+      <property name="geometry">
+       <rect>
+        <x>39</x>
+        <y>250</y>
+        <width>551</width>
+        <height>321</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Search_But">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>170</y>
+        <width>81</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>backgrounds/Search Icon.jpg</normaloff>backgrounds/Search Icon.jpg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>80</width>
+        <height>83</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Calculator</string>
+     </attribute>
+     <widget class="QLabel" name="Calculator">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>625</width>
+        <height>612</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>backgrounds/Calculator.jpg</pixmap>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="Expression">
+      <property name="geometry">
+       <rect>
+        <x>39</x>
+        <y>220</y>
+        <width>551</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>IBeamCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(212, 252, 255, 1);</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Answer">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>390</y>
+        <width>551</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Eval_But">
+      <property name="geometry">
+       <rect>
+        <x>43</x>
+        <y>503</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Evaluate</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Clear_But">
+      <property name="geometry">
+       <rect>
+        <x>237</x>
+        <y>503</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Clear</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Speak_But">
+      <property name="geometry">
+       <rect>
+        <x>431</x>
+        <y>503</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Speak</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Message">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>560</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Memory</string>
+     </attribute>
+     <widget class="QLabel" name="Memory">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>625</width>
+        <height>612</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>Memory.jpg</pixmap>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="Mem_Display">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>170</y>
+        <width>551</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Del_But">
+      <property name="geometry">
+       <rect>
+        <x>212</x>
+        <y>518</y>
+        <width>221</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 17pt &quot;Arial Black&quot;;
+background-color: rgba(170, 163, 255, 1);</string>
+      </property>
+      <property name="text">
+       <string>Clear Memory</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>630</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
