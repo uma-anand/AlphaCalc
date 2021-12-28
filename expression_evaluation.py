@@ -83,29 +83,5 @@ def evaluation(expression):
     except SyntaxError:
         return addbrackets(expression)
 
-def audio():
-    # To Convert Speech to Text
-    from speech_recognition import Recognizer,Microphone
-    rec=Recognizer()
-    mic=Microphone()
-    txt=''
-    with mic as audio_file:
-        rec.adjust_for_ambient_noise(audio_file)
-        audio=rec.listen(audio_file)
-        try:
-            speech=rec.recognize_google(audio)
-            try:
-                txt=evaluation(speech)
-            except Exception:
-                txt=str(eval(speech))
-            # To Convert Text to Speech
-            from os import remove
-            from gtts import gTTS
-            from playsound import playsound
-            output=gTTS(text=txt,lang='en',slow=False)
-            output.save('answer.mp3')
-            playsound('answer.mp3') 
-            remove('answer.mp3')
-        except Exception:
-            pass
+
 
