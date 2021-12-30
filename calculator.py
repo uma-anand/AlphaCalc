@@ -168,9 +168,9 @@ class Calculator(QMainWindow):
             row_count=self.Display.rowCount()
             self.Display.setRowCount(row_count+1)
             self.Display.setItem(row_count,0,QTableWidgetItem(self.Input_1.text()))
-            self.Display.setItem(row_count,1,QTableWidgetItem(self.Input_3.text()))
-            self.Display.setItem(row_count,2,QTableWidgetItem(self.Input_4.text()))
-            self.Display.setItem(row_count,3,QTableWidgetItem(self.Input_2.text()))
+            self.Display.setItem(row_count,1,QTableWidgetItem(self.Input_2.text()))
+            self.Display.setItem(row_count,2,QTableWidgetItem(self.Input_3.text()))
+            self.Display.setItem(row_count,3,QTableWidgetItem(self.Input_4.text()))
             
     def remove(self):
             delete_preset(self.Input_5.text(),self.Input_6.text(), self.variable)
