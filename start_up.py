@@ -31,16 +31,6 @@ def exists(database):
             return True
     return False
 
-def use_presets():
-    if not exists("alphacalc"):
-        cur.execute("create database alphacalc")
-        cur.execute("use alphacalc")
-        cur.execute('create table Memory (Date date, Time time, Expression varchar(50), Answer varchar(50))')
-    else:
-        cur.execute('use alphacalc')
-        cur.execute('drop table operations')
-        cur.execute('drop table temp_operations')
-
 def create_table(tablename):
     b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
     cur.execute(b)
@@ -51,6 +41,15 @@ def create_table(tablename):
 
 def create_presets():
     create_table("operations")
+
+def use_presets():
+    if not exists("alphacalc"):
+        cur.execute("create database alphacalc")
+        cur.execute("use alphacalc")
+        cur.execute('create table Memory (Date date, Time time, Expression varchar(50), Answer varchar(50))')
+        create_presets()
+    else:
+        cur.execute('use alphacalc')
 
 
 
