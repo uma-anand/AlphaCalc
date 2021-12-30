@@ -5,7 +5,7 @@ import sys
 import mysql.connector as ms
 from expression_evaluation import begin_eval
 from preset_management import begin, new_temp, view_presets
-from start_up import check_password, relative_to_bg
+from start_up import check_password, relative_to_bg, use_presets
 
 class HomePage(QMainWindow):
     def __init__(self):
