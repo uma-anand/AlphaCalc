@@ -22,6 +22,8 @@ def translate_operations(phrase):
         to_eval = phrase[sub_ind+len(operation[3])::]+operation[1]+phrase[operation_ind+len(operation[2]):sub_ind:]
     elif operation[0] == "" or operation[0] == " ":
         to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
+    elif operation[0] == "3":
+        to_eval = '('+phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+'))'
     return to_eval
  
 # split the expression into smaller fragments based on bracket placements
@@ -82,6 +84,9 @@ def evaluation(expression):
         return split_expression(expression)
     except SyntaxError:
         return addbrackets(expression)
+
+
+
 
 
 
