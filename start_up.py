@@ -1,5 +1,6 @@
 import mysql.connector as ms
 from pathlib import Path
+from math import *
 
 operations = [[" ", "**", "^", " "], [" ", "*", "multiplied by", " "], [" ", "*", "multiplied with", " "], [" ", "+", "added by", " "], 
               [" ", "+", "added with", " "],[" ", "/", "divided by", " "], [" ", "-", "subtracted by", " "],["2", "/", "divide","by"], 
@@ -7,7 +8,9 @@ operations = [[" ", "**", "^", " "], [" ", "*", "multiplied by", " "], [" ", "*"
               ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], [" ", "**", "to the power of", " "],
               [" ", ">=", "greater than or equal to", " "], [" ", ">", "is greater than", " "], 
               [" ", ">", "greater than", " "], [" ", "<=", "lesser than or equal to", " "], [" ", "<=", "less than or equal to", " "], [" ", "<", "is less than", " "], 
-              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "]]
+              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "], ["3","sqrt","square root of"," " ],
+              ["3","sin","sine"," " ],["3","sin","sine of"," "],["3","sin","sin of"," "],["3","cos","cosine"," " ],["3","cos","cosine of"," "],
+              ["3","cos","cos of"," "], ["3","tan","tan of"," " ]]
 
 def relative_to_bg(path: str) -> Path:
         return BG_PATH / Path(path)
@@ -19,10 +22,12 @@ def check_password(password):
         global con, cur
         con = ms.connect(host = "localhost", user = "root", passwd = password)
         cur = con.cursor()
+        cur.execute('use alphacalc')
         return True
     except Exception:
         return False
         
+
 
 def exists(database):
     cur.execute("show databases")
@@ -43,6 +48,7 @@ def create_table(tablename):
 def create_presets():
     create_table("operations")
 
+
 def use_presets():
     if not exists("alphacalc"):
         cur.execute("create database alphacalc")
@@ -51,6 +57,5 @@ def use_presets():
         create_presets()
     else:
         cur.execute('use alphacalc')
-
 
 
