@@ -1,28 +1,33 @@
 import mysql.connector as ms
-import sys
+from pathlib import Path
+from math import *
 
-two_part_operations = {"type":"two_part_operations", "divide":"by", "multiply":"with", "add":"with", "subtract":"from"}
-operations_translations = {"type":"operations_translations","divide":"/", "multiply":"*", "add":"+", "subtract":"-"}
-like_add = {"type":"like_add","divide":"/", "multiply":"*", "add":"+"}
-like_subtract = {"type":"like_subtract","subtract":"-"}
-like_exp = {"type":"like_exp","to the power of":"**", "^":"**", "multiplied by": "*", "divided by": "/", "multiplied with": "*", 
-            "added with": "+", "subtracted by":"-", "greater than or equal to": ">=", "is greater than":">","greater than":">", 
-            "lesser than or equal to": "<=", "is lesser than":"<", "lesser than":"<", "is equal to":"==", "equal to":"=="}
-operations_overall =  {"type":"operations_overall", "multiplied by": "*", "divided by": "/", "multiplied with": "*", "added with": "+", 
-                "subtracted by":"-", "divide":"by", "multiply":"with", "add":"with", "subtract":"from", "to the power of":"**",
-                "^":"**",  "greater than or equal to": ">=", "is greater than":">","greater than":">", "lesser than or equal to": "<=",
-                "is lesser than":"<", "lesser than":"<", "is equal to":"==", "equal to":"==" }
-overall = [two_part_operations, operations_translations, like_add, like_subtract, like_exp, operations_overall]
-overall_names = ["two_part_operations", "operations_translations", "like_add", "like_subtract", "like_exp", "operations_overall"]
+operations = [[" ", "**", "^", " "], [" ", "*", "multiplied by", " "], [" ", "*", "multiplied with", " "], [" ", "+", "added by", " "], 
+              [" ", "+", "added with", " "],[" ", "/", "divided by", " "], [" ", "-", "subtracted by", " "],["2", "/", "divide","by"], 
+              ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], ["2", "+", "add","with"], ["2", "+", "add","to"],
+              ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], [" ", "**", "to the power of", " "],
+              [" ", ">=", "greater than or equal to", " "], [" ", ">", "is greater than", " "], 
+              [" ", ">", "greater than", " "], [" ", "<=", "lesser than or equal to", " "], [" ", "<=", "less than or equal to", " "], [" ", "<", "is less than", " "], 
+              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "], ["3","sqrt","square root of"," " ],
+              ["3","sin","sine"," " ],["3","sin","sine of"," "],["3","sin","sin of"," "],["3","cos","cosine"," " ],["3","cos","cosine of"," "],
+              ["3","cos","cos of"," "], ["3","tan","tan of"," " ]]
+
+def relative_to_bg(path: str) -> Path:
+        return BG_PATH / Path(path)
+OUTPUT_PATH = Path(__file__).parent
+BG_PATH = OUTPUT_PATH / Path("./backgrounds")
+
 
 def check_password(password):
     try:
         global con, cur
         con = ms.connect(host = "localhost", user = "root", passwd = password)
         cur = con.cursor()
+        cur.execute('use alphacalc')
+        return True
     except Exception:
-        print('Invalid Password')
-        sys.exit()
+        return False
+
 
 def exists(database):
     cur.execute("show databases")
@@ -32,26 +37,27 @@ def exists(database):
             return True
     return False
 
-def use_presets():
-    if not exists("presets"):
-        cur.execute("create database presets")
-        cur.execute("use presets")
-    else:
-        cur.execute("drop database presets")
-        use_presets()
 
 def create_table(tablename):
-    b = "create table "+ tablename+" (operation_name varchar(50), operation varchar(50))"
+    b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
     cur.execute(b)
-    ind = overall_names.index(tablename)
-    corr_dict = overall[ind]
-    for x in corr_dict:
-        a = "insert into "+tablename+ " values ( '"+ x+"', '"+ corr_dict[x]+"')"
+    for x in operations:
+        a = "insert into "+tablename+ " values ( '%s', '%s', '%s', '%s' )" %(x[0], x[1], x[2], x[3])
         cur.execute(a)
         con.commit()
 
 def create_presets():
-    for y in overall_names:
-        create_table(y)
+    create_table("operations")
+
+
+def use_presets():
+    if not exists("alphacalc"):
+        cur.execute("create database alphacalc")
+        cur.execute("use alphacalc")
+        cur.execute('create table Memory (Date date, Time time, Expression varchar(50), Answer varchar(50))')
+        create_presets()
+    else:
+        cur.execute('use alphacalc')
+
 
 
