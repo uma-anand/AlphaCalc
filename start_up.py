@@ -17,6 +17,7 @@ def relative_to_bg(path: str) -> Path:
 OUTPUT_PATH = Path(__file__).parent
 BG_PATH = OUTPUT_PATH / Path("./backgrounds")
 
+
 def check_password(password):
     try:
         global con, cur
@@ -26,7 +27,6 @@ def check_password(password):
         return True
     except Exception:
         return False
-        
 
 
 def exists(database):
@@ -36,6 +36,7 @@ def exists(database):
         if database in x:
             return True
     return False
+
 
 def create_table(tablename):
     b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
@@ -57,5 +58,6 @@ def use_presets():
         create_presets()
     else:
         cur.execute('use alphacalc')
+
 
 
