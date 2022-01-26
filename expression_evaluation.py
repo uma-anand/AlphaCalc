@@ -4,20 +4,16 @@ def begin_eval(password):
     global operations
     update_dicts(password)
 
-
 #calculates expression given the input multiply 3 by 4 or 
  
 def translate_operations(phrase):
-
     for a in operations:
-        if a[2] in phrase:
-
+        if a[2] in phrase and a[3] in phrase:
             operation = a
             break
     else:
         return phrase
-
-    if operation[0] != "" or operation[0] != " ":
+    if operation[0] not in " ":
         sub_ind = phrase.index(operation[3])
     operation_ind = phrase.index(operation[2])
     if operation[0] == "2":
@@ -43,7 +39,6 @@ def split_expression(expression):
         ans=expression.replace(x,y)
         expression=ans
     return eval(str(ans))
-
 
 #if brackets not already added, adds them mechanically, from left to right
 
@@ -81,7 +76,6 @@ def addbrackets(express):
         return split_expression(new_expression)
     except SyntaxError:
         return addbrackets(new_expression)
-
 
 # control of evaluation
 
