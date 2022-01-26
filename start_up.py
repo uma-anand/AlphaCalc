@@ -2,21 +2,22 @@ import mysql.connector as ms
 from pathlib import Path
 from math import *
 
-operations = [[" ", "**", "^", " "], [" ", "*", "multiplied by", " "], [" ", "*", "multiplied with", " "], [" ", "+", "added by", " "], 
-              [" ", "+", "added with", " "],[" ", "/", "divided by", " "], [" ", "-", "subtracted by", " "],["2", "/", "divide","by"], 
-              ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], ["2", "+", "add","with"], ["2", "+", "add","to"],
-              ["1", "/", "divide","from"], ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], [" ", "**", "to the power of", " "],
+operations = [["3","sqrt","square root of"," " ],[" ", "**", "^", " "], [" ", "**", "to the power of", " "],
+              ["3","sin","sine of"," "],["3","sin","sin of"," "],
+              ["3","sin","sine"," " ], ["3","cos","cosine of"," "], ["3","cos","cosine"," " ],
+              ["3","cos","cos of"," "], ["3","tan","tan of"," " ], [" ", "*", "multiplied by", " "], [" ", "*", "multiplied with", " "], 
+              [" ", "/", "divided by", " "], ["2", "/", "divide","by"], ["1", "/", "divide","from"],
+              ["2", "*", "multiply","with"], ["2", "*", "multiply","by"], [" ", "+", "added by", " "], 
+              [" ", "+", "added with", " "], [" ", "-", "subtracted by", " "] ["2", "+", "add","with"], ["2", "+", "add","to"],
+              ["1", "-", "subtract","from"], ["2", "-", "subtract","by"], 
               [" ", ">=", "greater than or equal to", " "], [" ", ">", "is greater than", " "], 
               [" ", ">", "greater than", " "], [" ", "<=", "lesser than or equal to", " "], [" ", "<=", "less than or equal to", " "], [" ", "<", "is less than", " "], 
-              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "], ["3","sqrt","square root of"," " ],
-              ["3","sin","sine"," " ],["3","sin","sine of"," "],["3","sin","sin of"," "],["3","cos","cosine"," " ],["3","cos","cosine of"," "],
-              ["3","cos","cos of"," "], ["3","tan","tan of"," " ]]
+              [" ", "<", "less than", " "], [" ", "==", "is equal to", " "], [" ", "==", "equal to", " "], ]
 
 def relative_to_bg(path: str) -> Path:
         return BG_PATH / Path(path)
 OUTPUT_PATH = Path(__file__).parent
 BG_PATH = OUTPUT_PATH / Path("./backgrounds")
-
 
 def check_password(password):
     try:
@@ -27,6 +28,7 @@ def check_password(password):
         return True
     except Exception:
         return False
+        
 
 
 def exists(database):
@@ -36,7 +38,6 @@ def exists(database):
         if database in x:
             return True
     return False
-
 
 def create_table(tablename):
     b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
@@ -49,7 +50,7 @@ def create_table(tablename):
 def create_presets():
     create_table("operations")
 
-
+#create_presets()
 def use_presets():
     if not exists("alphacalc"):
         cur.execute("create database alphacalc")
