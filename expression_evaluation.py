@@ -3,6 +3,13 @@ from preset_management import *
 def begin_eval(password):
     global operations
     update_dicts(password)
+    
+def audio_correction(phrase):
+    d = {'one':'1','two':'2','three':'3','four':'4','five':'5','six':'6','seven':'7','eight':'8','nine':'9'}
+    for x in phrase.split():
+        if x in d:
+            phrase=phrase.replace(x,d[x])
+    return phrase
 
 #calculates expression given the input multiply 3 by 4 or 
  
@@ -38,8 +45,12 @@ def split_expression(expression):
     for x,y in zip(fragments,translated):
         ans=expression.replace(x,y)
         expression=ans
-    return eval(str(ans))
-
+    try:
+        return eval(str(ans))
+    except NameError:
+        corrected_phrase = audio_correction(expression)
+        return split_expression(corrected_phrase)
+    
 #if brackets not already added, adds them mechanically, from left to right
 
 def addbrackets(express):
