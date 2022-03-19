@@ -1,12 +1,13 @@
-from preset_management import view_presets
-from math import *
+from preset_management import *
 
+def begin_eval(password):
+    global operations
+    update_dicts(password)
 
-#calculates expression given the input multiply 3 by 4 or 
+#calculates expression given the input multiply 3 by 4  
  
-def translate_operations(phrase,password):
-    op = view_presets(password)
-    for a in op:
+def translate_operations(phrase):
+    for a in operations:
         if a[2] in phrase and a[3] in phrase:
             operation = a
             break
@@ -22,29 +23,45 @@ def translate_operations(phrase,password):
     elif operation[0] == "" or operation[0] == " ":
         to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
     elif operation[0] == "3":
-         to_eval = phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+')'
+        to_eval = '('+phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+'))'
     return to_eval
  
- # split the expression into smaller fragments based on bracket placements
+# split the expression into smaller fragments based on bracket placements
 
-def split_expression(expression,password):
+def split_expression(expression):
     from re import split
     fragments=list(filter(None,split(r'[()]',expression)))
     translated=[]
     for x in fragments:
-        translated+=[translate_operations(x,password)]
+        translated+=[translate_operations(x)]
     ans=''
     for x,y in zip(fragments,translated):
         ans=expression.replace(x,y)
         expression=ans
-    #return eval(str(ans))
-    return ans
+    return eval(str(ans))
 
 
 #if brackets not already added, adds them mechanically, from left to right
+#operations = [["3","sqrt","square root of"," " ],[" ", "**", "^", " "], [" ", "**", "to the power of", " "],
 
-def addbrackets(express,password):
+def addbrackets(express):
     expression = express
+    for lis in operations:
+        if lis[0] == 3:
+            ind = expression.find(lis[2])
+            if ind!=-1:
+                for a in expression[ind:]:
+                    if a.isdigit:
+                        fun_num = expression.find(a, ind)
+                        break
+                for b in expression[fun_num:]:
+                    if b.isalpha:
+                        fun_alph = expression.find(b, fun_num)
+                        break
+                else:
+                    fun_alph = len(expression)
+                expression = expression[:ind] + split_expression(expression[ind:fun_alph])+expression[fun_alph::] 
+
     a = expression.find(")")
     if a!=-1:
         expression = expression[a+1::]
@@ -72,17 +89,19 @@ def addbrackets(express,password):
     else:
         second_char = len(temp)
     second_char+=second_num
-    new_expression = str(eval(translate_operations(expression[:second_char:],password)))+expression[second_char::]
+    print(expression[:second_char:])
+    new_expression = str(eval(translate_operations(expression[:second_char:])))+expression[second_char::]
     try:
-        return split_expression(new_expression,password)
+        return split_expression(new_expression)
     except SyntaxError:
-        return addbrackets(new_expression,password)
+        return addbrackets(new_expression)
 
 # control of evaluation
 
-def evaluation(expression,password):
+def evaluation(expression):
     try:
-        return split_expression(expression,password)
+        return split_expression(expression)
     except SyntaxError:
-        return addbrackets(expression,password)
+        return addbrackets(expression)
 
+print(evaluation('4 multiplied by 3 ^ 2'))
