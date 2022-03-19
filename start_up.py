@@ -20,16 +20,14 @@ OUTPUT_PATH = Path(__file__).parent
 BG_PATH = OUTPUT_PATH / Path("./backgrounds")
 
 def check_password(password):
-    try:
-        global con, cur
-        con = ms.connect(host = "localhost", user = "root", passwd = password)
-        cur = con.cursor()
-        cur.execute('use alphacalc')
+    global con, cur
+    con = ms.connect(host = "localhost", user = "root", passwd = password)
+    cur = con.cursor()
+    if con.is_connected():
         return True
-    except Exception:
+    else:
         return False
         
-
 
 def exists(database):
     cur.execute("show databases")
@@ -40,6 +38,7 @@ def exists(database):
     return False
 
 def create_table(tablename):
+    cur.execute('use alphacalc')
     b = "create table "+ tablename+" (type varchar(1), translation varchar (10), operation_part_1 varchar(50), operation_part_2 varchar(50))"
     cur.execute(b)
     for x in operations:
@@ -48,17 +47,11 @@ def create_table(tablename):
         con.commit()
 
 def create_presets():
-    create_table("operations")
+    create_table("operations") 
 
-#create_presets()
-def use_presets():
-    if not exists("alphacalc"):
+def user_login():
+    if not exists('alphacalc'):
         cur.execute("create database alphacalc")
         cur.execute("use alphacalc")
         cur.execute('create table Memory (Date date, Time time, Expression varchar(50), Answer varchar(50))')
         create_presets()
-    else:
-        cur.execute('use alphacalc')
-
-
-
