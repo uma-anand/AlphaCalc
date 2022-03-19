@@ -51,4 +51,9 @@ def search(keyword, password):
                 for q in range(len(part)):
                     if (part[0:q] == keyword[0][0:q].lower()) and (part[q+1::].lower() == keyword[0][q+1::]):
                         search_results.append(tup)
-    return search_results
+    res = []
+    for i in search_results:
+        if i not in res:
+            res.append(i)
+    return res
+
