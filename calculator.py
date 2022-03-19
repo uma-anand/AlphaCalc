@@ -95,9 +95,6 @@ class Calculator(QMainWindow):
         self.Del_But = self.findChild(QPushButton,'Del_But')
         self.Del_But.clicked.connect(self.delete)
 
-        self.show()
-
-
     def clear(self):
             self.Expression.clear()
             self.Answer.setText("")
@@ -111,7 +108,7 @@ class Calculator(QMainWindow):
 
     def calculate(self):
             n=self.Expression.toPlainText()
-            ans=str(evaluation(n))
+            ans=str(evaluation(n,self.variable))
             if self.Expression.toPlainText() != '':
                 self.Answer.setText(str(ans))
             d=str(date.today())
@@ -144,16 +141,16 @@ class Calculator(QMainWindow):
             rec=Recognizer()
             mic=Microphone()
             with mic as audio_file:
-                rec.adjust_for_ambient_noise(audio_file,duration=5)
-                self.Message.setText('Start Speaking')
+                rec.adjust_for_ambient_noise(audio_file,duration=3)
+                self.audio_output('Start Speaking')
                 audio=rec.listen(audio_file)
                 try:
                         speech=rec.recognize_google(audio)
                         result=self.calculate(speech)
                         self.audio_output(result)
                 except Exception:
-                       self.Message.setText('Try Again')
-
+                        self.audio_output('Try Again')
+                        
     def audio_output(self,text):
             from os import remove
             from gtts import gTTS
