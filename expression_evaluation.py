@@ -1,20 +1,12 @@
-from preset_management import *
+from preset_management import view_presets
+from math import *
 
-def begin_eval(password):
-    global operations
-    update_dicts(password)
-    
-def audio_correction(phrase):
-    d = {'one':'1','two':'2','three':'3','four':'4','five':'5','six':'6','seven':'7','eight':'8','nine':'9'}
-    for x in phrase.split():
-        if x in d:
-            phrase=phrase.replace(x,d[x])
-    return phrase
 
 #calculates expression given the input multiply 3 by 4 or 
  
-def translate_operations(phrase):
-    for a in operations:
+def translate_operations(phrase,password):
+    op = view_presets(password)
+    for a in op:
         if a[2] in phrase and a[3] in phrase:
             operation = a
             break
@@ -30,30 +22,28 @@ def translate_operations(phrase):
     elif operation[0] == "" or operation[0] == " ":
         to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
     elif operation[0] == "3":
-        to_eval = '('+phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+'))'
+         to_eval = phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+')'
     return to_eval
  
-# split the expression into smaller fragments based on bracket placements
+ # split the expression into smaller fragments based on bracket placements
 
-def split_expression(expression):
+def split_expression(expression,password):
     from re import split
     fragments=list(filter(None,split(r'[()]',expression)))
     translated=[]
     for x in fragments:
-        translated+=[translate_operations(x)]
+        translated+=[translate_operations(x,password)]
     ans=''
     for x,y in zip(fragments,translated):
         ans=expression.replace(x,y)
         expression=ans
-    try:
-        return eval(str(ans))
-    except NameError:
-        corrected_phrase = audio_correction(expression)
-        return split_expression(corrected_phrase)
-    
+    #return eval(str(ans))
+    return ans
+
+
 #if brackets not already added, adds them mechanically, from left to right
 
-def addbrackets(express):
+def addbrackets(express,password):
     expression = express
     a = expression.find(")")
     if a!=-1:
@@ -82,18 +72,17 @@ def addbrackets(express):
     else:
         second_char = len(temp)
     second_char+=second_num
-    new_expression = str(eval(translate_operations(expression[:second_char:])))+expression[second_char::]
+    new_expression = str(eval(translate_operations(expression[:second_char:],password)))+expression[second_char::]
     try:
-        return split_expression(new_expression)
+        return split_expression(new_expression,password)
     except SyntaxError:
-        return addbrackets(new_expression)
+        return addbrackets(new_expression,password)
 
 # control of evaluation
 
-def evaluation(expression):
+def evaluation(expression,password):
     try:
-        return split_expression(expression)
+        return split_expression(expression,password)
     except SyntaxError:
-        return addbrackets(expression)
-
+        return addbrackets(expression,password)
 
