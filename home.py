@@ -33,10 +33,8 @@ class HomePage(QMainWindow):
                         global cur
                         cur = con.cursor()
                 self.window = CalcWindow
-                self.window.variable = password
-                begin(password)
-                new_temp(password)
-                begin_eval(password)
+                self.window.variable = password          
+                user_login()
                 cur.execute('use alphacalc')
                 cur.execute('select * from memory')
                 data=cur.fetchall()
