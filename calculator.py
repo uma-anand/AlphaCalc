@@ -94,6 +94,36 @@ class Calculator(QMainWindow):
         self.Mem_Display.setColumnWidth(3,75)
         self.Del_But = self.findChild(QPushButton,'Del_But')
         self.Del_But.clicked.connect(self.delete)
+        
+        # Tab 6
+        self.tab_6 = self.findChild(QWidget,'tab_6')
+        self.Graph = self.findChild(QLabel,'Graph')
+        self.Graph.setPixmap(QPixmap(str(relative_to_bg("Graph.jpg"))))
+        self.Graph_But = self.findChild(QPushButton,'Graph_But')
+        self.Remove_But = self.findChild(QPushButton,'Remove_But')
+        self.Y1 = self.findChild(QLineEdit,'Y1')
+        self.Y2 = self.findChild(QLineEdit,'Y2')
+        self.Y3 = self.findChild(QLineEdit,'Y3')
+        self.Graph_But.clicked.connect(self.plot_graph)
+        self.Remove_But.clicked.connect(self.clear)
+
+    def plot_graph(self):
+            f = (self.Y1.text(),self.Y2.text(),self.Y3.text())
+            x = list(range(-10,11))
+            for a in f:
+                if a != '':
+                    y = []
+                    for n in x:
+                        y.append(eval(a.replace('x',str(n))))
+                    plt.plot(x, y)
+            plt.axhline(y=0, color='r')
+            plt.axvline(x=0, color='r')
+            plt.title('Graphs')
+            plt.xlabel("Values of x")
+            plt.ylabel("Values of y")
+            plt.grid()
+            plt.show()
+
 
     def clear(self):
             self.Expression.clear()
