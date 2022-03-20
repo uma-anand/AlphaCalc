@@ -22,8 +22,11 @@ def translate_operations(phrase,password):
     elif operation[0] == "" or operation[0] == " ":
         to_eval = phrase[:operation_ind:]+operation[1]+phrase[operation_ind+len(operation[2])::]
     elif operation[0] == "3":
-         to_eval = phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+')'
-    return to_eval
+         to_eval = '('+phrase[:operation_ind:]+operation[1]+'('+phrase[operation_ind+len(operation[2])::]+'))'
+    try:
+        return str(eval(to_eval))
+    except Exception:
+        return to_eval
  
  # split the expression into smaller fragments based on bracket placements
 
@@ -32,14 +35,23 @@ def split_expression(expression,password):
     fragments=list(filter(None,split(r'[()]',expression)))
     translated=[]
     for x in fragments:
-        translated+=[translate_operations(x,password)]
+        try:
+            translated+=[translate_operations(x,password)]
+        except Exception:
+            translated+=[x]
     ans=''
     for x,y in zip(fragments,translated):
         ans=expression.replace(x,y)
         expression=ans
-    #return eval(str(ans))
-    return ans
-
+    if ans.find('('):
+        remove_brackets = list(filter(None,split(r'[()]',ans)))
+        ans = ''
+        for x in remove_brackets:
+            ans+=x
+    try:
+        return eval(str(ans))
+    except Exception:
+        return split_expression(ans,password)
 
 #if brackets not already added, adds them mechanically, from left to right
 
